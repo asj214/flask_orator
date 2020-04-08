@@ -10,7 +10,12 @@ class CreatePostsTable(Migration):
         """
         with self.schema.create('posts') as table:
             table.increments('id')
+            table.integer('user_id')
+            table.string('title')
+            table.text('body')
             table.timestamps()
+            table.soft_deletes()
+            table.index(['user_id', 'deleted_at'], name='user_posts')
 
     def down(self):
         """
