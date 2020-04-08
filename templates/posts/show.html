@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-xs-12">
+        <h3 class="mb-3">Post</h3>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body|replace('\n', '<br>'|safe) }}</p>
+                <footer class="blockquote-footer">{{ post.user.name }} <cite title="Source Title">{{ post.created_at }}</cite></footer>
+            </div>
+            <div class="card-body">
+                <div class="float-left">
+                    <a href="{{ url_for('post_controller.index') }}" class="card-link">List</a>
+                    {% if 'auth' in session and post.user_id == session['auth']['id'] %}
+                    <a href="{{ url_for('post_controller.update', pk=post.id) }}" class="card-link">Modify</a>
+                    <a href="javascript:void(0);" class="card-link text-danger" onclick="$('#frm-delete').submit();">Delete</a>
+                    <form id="frm-delete" action="{{ url_for('post_controller.delete', pk=post.id) }}" method="post">
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+{% endblock %}
