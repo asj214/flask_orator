@@ -40,10 +40,14 @@ logger.addHandler(handler)
 
 from web import users
 from web import posts
+from api.v1 import auth
+
 
 # register blueprint
 app.register_blueprint(users.user_controller, url_prefix='/users')
 app.register_blueprint(posts.post_controller, url_prefix='/posts')
+app.register_blueprint(auth.api_auth_v1, url_prefix='/api/v1/auth')
+
 
 @app.cli.command()
 def routes():

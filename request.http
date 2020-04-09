@@ -1,0 +1,9 @@
+###
+# api/v1/auth/login
+POST http://127.0.0.1:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "asj214@naver.com",
+    "password": "1234"
+}
