@@ -1,6 +1,8 @@
 from orator.seeds import Seeder
 from orator.orm import Factory
 
+from faker import Faker
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from models import User
@@ -11,10 +13,13 @@ from models import User
 
 factory = Factory()
 
+ko_faker = Faker('ko_KR')
+
 @factory.define(User)
 def users_factory(faker):
+
     return {
-        'name': faker.name(),
+        'name': ko_faker.name(),
         'email': faker.email(),
         'password': generate_password_hash('1234')
     }

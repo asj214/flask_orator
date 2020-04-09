@@ -1,7 +1,12 @@
+import json
 from flask import Flask, render_template
 from flask_orator import Orator
 
 import logging
+
+cfg: dict = {}
+with open('cfg.json', encoding='utf-8') as cfg_json:
+    cfg = json.loads(cfg_json.read())
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -10,12 +15,12 @@ app.config['ORATOR_DATABASES'] = {
     'default': 'mysql',
     'mysql': {
         'driver': 'mysql',
-        'host': 'localhost',
-        'database': 'flask_orator',
-        'user': 'sjahn',
-        'password': '1234',
+        'host': cfg['database']['host'],
+        'database': cfg['database']['database'],
+        'user': cfg['database']['user'],
+        'password': cfg['database']['password'],
         'prefix': '',
-        'log_queries': True
+        'log_queries': cfg['database']['log_queries']
     }
 }
 
