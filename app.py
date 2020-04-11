@@ -1,6 +1,7 @@
 import json
 from flask import Flask, render_template
 from flask_orator import Orator
+from flask_jwt_extended import JWTManager
 
 import logging
 
@@ -10,7 +11,7 @@ with open('cfg.json', encoding='utf-8') as cfg_json:
 
 app = Flask(__name__)
 app.secret_key = 'secret'
-
+app.config['JSON_SORT_KEYS'] = False
 app.config['ORATOR_DATABASES'] = {
     'default': 'mysql',
     'mysql': {
@@ -24,7 +25,11 @@ app.config['ORATOR_DATABASES'] = {
     }
 }
 
+app.config['JWT_SECRET_KEY'] = 'qwe123'  # Change this!
+app.config['JWT_TOKEN_LOCATION'] = ['headers'] # headers', 'cookies', 'query_string', 'json'
+
 db = Orator(app)
+jwt = JWTManager(app)
 
 logger = logging.getLogger('orator.connection.queries')
 logger.setLevel(logging.DEBUG)
@@ -42,11 +47,10 @@ from web import users
 from web import posts
 from api.v1 import auth
 
-
 # register blueprint
 app.register_blueprint(users.user_controller, url_prefix='/users')
 app.register_blueprint(posts.post_controller, url_prefix='/posts')
-app.register_blueprint(auth.api_auth_v1, url_prefix='/api/v1/auth')
+app.register_blueprint(auth.api_auth, url_prefix='/api/v1/auth')
 
 
 @app.cli.command()

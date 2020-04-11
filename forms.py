@@ -15,6 +15,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('비밀번호', validators=[DataRequired()])
     redirect_url = HiddenField('리다이렉트 URL', validators=[])
 
+
+class ApiLoginForm(FlaskForm):
+    email = EmailField('이메일', validators=[DataRequired(), Email()])
+    password = PasswordField('비밀번호', validators=[DataRequired()])
+
+
 class PostForm(FlaskForm):
     title = StringField('제목', validators=[DataRequired()])
     body = TextAreaField('본문', validators=[DataRequired()])

@@ -1,7 +1,9 @@
-@base_url = http://127.0.0.1:7000
+@base_url = http://127.0.0.1:5000
+
 
 ###
 # api/v1/auth/login
+# @name login
 POST {{base_url}}/api/v1/auth/login
 Content-Type: application/json
 
@@ -9,3 +11,15 @@ Content-Type: application/json
     "email": "asj214@naver.com",
     "password": "1234"
 }
+
+@access_token = {{login.response.body.access_token}}
+
+
+###
+# api/auth/me
+GET {{base_url}}/api/v1/auth/me
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+

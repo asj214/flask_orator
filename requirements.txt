@@ -12,7 +12,6 @@ itsdangerous==1.1.0
 Jinja2==2.11.1
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
-marshmallow==3.5.1
 mysqlclient==1.4.6
 orator==0.9.7
 pastel==0.2.0
@@ -34,3 +33,5 @@ woops==0.2.1
 wrapt==1.12.1
 WTForms==2.2.1
 WTForms-JSON==0.3.3
+flask-apispec==0.8.8
+Flask-JWT-Extended==3.24.1

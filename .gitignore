@@ -131,3 +131,4 @@ dmypy.json
 cfg.json
 
 .vscode
+.DS_Store
