@@ -1,4 +1,4 @@
-from app import db
+from flask_app import db
 from orator import Model, SoftDeletes
 from orator.orm import belongs_to, has_many
 
