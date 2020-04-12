@@ -5,9 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import User
 
-user_controller = Blueprint('user_controller', __name__)
+blueprint = Blueprint('users', __name__)
 
-@user_controller.route('/login', methods=['GET', 'POST'])
+@blueprint.route('/login', methods=['GET', 'POST'])
 def login():
 
     if 'auth' in session:
@@ -35,13 +35,13 @@ def login():
 
     return render_template('users/login.html', form=form, redirect_url=redirect_url)
 
-@user_controller.route('/logout', methods=['GET'])
+@blueprint.route('/logout', methods=['GET'])
 def logout():
     if 'auth' in session:
         session.pop('auth', None)
-    return redirect(url_for('user_controller.login'))
+    return redirect(url_for('users.login'))
 
-@user_controller.route('/create', methods=['GET', 'POST'])
+@blueprint.route('/create', methods=['GET', 'POST'])
 def create():
     form = UserForm()
     if form.validate_on_submit():
@@ -52,5 +52,5 @@ def create():
         user.password=generate_password_hash(form.password.data)
         user.save()
 
-        return redirect(url_for('user_controller.login'))
+        return redirect(url_for('users.login'))
     return render_template('users/form.html', form=form)

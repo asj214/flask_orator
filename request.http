@@ -4,7 +4,7 @@
 ###
 # api/v1/auth/login
 # @name login
-POST {{base_url}}/api/v1/auth/login
+POST {{base_url}}/api/auth/login
 Content-Type: application/json
 
 {
@@ -17,9 +17,78 @@ Content-Type: application/json
 
 ###
 # api/auth/me
-GET {{base_url}}/api/v1/auth/me
+GET {{base_url}}/api/auth/me
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
+###
+# api/posts/index
+GET {{base_url}}/api/posts/
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
 
+{
+    "page": 2,
+    "per_page": 15
+}
+
+
+###
+# api/posts/create
+POST {{base_url}}/api/posts/
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "title": "hello world",
+    "body": "flask/orator/"
+}
+
+
+###
+# api/posts/show
+GET {{base_url}}/api/posts/2
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+# api/posts/update
+PUT {{base_url}}/api/posts/1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "title": "my father goes to the market with donkey",
+    "body": "hoo"
+}
+
+
+###
+# api/posts/update
+DELETE {{base_url}}/api/posts/1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+# api/posts/update
+POST {{base_url}}/api/posts/2/comments
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "body": "일요일에 공부"
+}
+
+
+###
+# api/posts/delete
+DELETE {{base_url}}/api/posts/2/comments
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "commentable_id": 3
+}

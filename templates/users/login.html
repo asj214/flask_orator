@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6 col-xs-12">
         <h3 class="mb-3">로그인</h3>
-        <form method="POST" action="{{ url_for('user_controller.login') }}">
+        <form method="POST" action="{{ url_for('users.login') }}">
             {{ form.csrf_token }}
             {{ form.redirect_url(value=redirect_url) }}
             <div class="form-group">
@@ -15,7 +15,7 @@
                 {{ form.password(class='form-control') }}
             </div>
             <button type="submit" class="btn btn-link">로그인</button>
-            <a href="{{ url_for('user_controller.create') }}" class="btn btn-link">회원가입</a>
+            <a href="{{ url_for('users.create') }}" class="btn btn-link">회원가입</a>
         </form>
     </div>
 </div>

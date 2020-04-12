@@ -31,6 +31,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['headers'] # headers', 'cookies', 'query_str
 db = Orator(app)
 jwt = JWTManager(app)
 
+
 logger = logging.getLogger('orator.connection.queries')
 logger.setLevel(logging.DEBUG)
 
@@ -43,14 +44,18 @@ handler.setFormatter(formatter)
 
 logger.addHandler(handler)
 
-from web import users
-from web import posts
-from api.v1 import auth
+
+from web import users, posts
+from api import (
+    api_auth,
+    api_posts
+)
 
 # register blueprint
-app.register_blueprint(users.user_controller, url_prefix='/users')
-app.register_blueprint(posts.post_controller, url_prefix='/posts')
-app.register_blueprint(auth.api_auth, url_prefix='/api/v1/auth')
+app.register_blueprint(users.blueprint, url_prefix='/users')
+app.register_blueprint(posts.blueprint, url_prefix='/posts')
+app.register_blueprint(api_auth.blueprint, url_prefix='/api/auth')
+app.register_blueprint(api_posts.blueprint, url_prefix='/api/posts')
 
 
 @app.cli.command()

@@ -6,7 +6,7 @@
         {% if form.errors %}
             {{ form.errors }}
         {% endif %}
-        <form method="POST" action="{{ url_for('user_controller.create') }}">
+        <form method="POST" action="{{ url_for('users.create') }}">
             {{ form.csrf_token }}
             <div class="form-group">
                 {{ form.email.label }}

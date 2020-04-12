@@ -12,10 +12,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models import User
 from serializers import LoginSchema, UserSchema
 
-api_auth = Blueprint('api_auth', __name__)
+blueprint = Blueprint('api_auth', __name__)
 
 
-@api_auth.route('/login', methods=['POST'])
+@blueprint.route('/login', methods=['POST'])
 @jwt_optional
 @use_kwargs(LoginSchema())
 @marshal_with(LoginSchema())
@@ -34,7 +34,7 @@ def login(email, password, **kwargs):
     return jsonify({'status': 404})
 
 
-@api_auth.route('/me', methods=['GET'])
+@blueprint.route('/me', methods=['GET'])
 @jwt_required
 @marshal_with(UserSchema())
 def show():

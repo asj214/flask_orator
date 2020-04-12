@@ -6,7 +6,7 @@
 
         <div class="d-flex justify-content-end">
             <div class="pb-2 bd-highlight">
-                <a href="{{ url_for('post_controller.create') }}" class="btn btn-outline-primary">Write</a>
+                <a href="{{ url_for('posts.create') }}" class="btn btn-outline-primary">Write</a>
             </div>
         </div>
         <div>
@@ -14,7 +14,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ url_for('post_controller.show', pk=post.id) }}">{{ post.title }}</a>
+                        <a href="{{ url_for('posts.show', pk=post.id) }}">{{ post.title }}</a>
                     </h5>
                     <p class="card-text">{{ post.body|replace('\n', '<br>'|safe) }}</p>
                     <footer class="blockquote-footer">{{ post.user.name }} <cite title="Source Title">{{ post.created_at }}</cite></footer>

@@ -11,11 +11,11 @@
             </div>
             <div class="card-body">
                 <div class="float-left">
-                    <a href="{{ url_for('post_controller.index') }}" class="card-link">List</a>
+                    <a href="{{ url_for('posts.index') }}" class="card-link">List</a>
                     {% if 'auth' in session and post.user_id == session['auth']['id'] %}
-                    <a href="{{ url_for('post_controller.update', pk=post.id) }}" class="card-link">Modify</a>
+                    <a href="{{ url_for('posts.update', pk=post.id) }}" class="card-link">Modify</a>
                     <a href="javascript:void(0);" class="card-link text-danger" onclick="$('#frm-delete').submit();">Delete</a>
-                    <form id="frm-delete" action="{{ url_for('post_controller.delete', pk=post.id) }}" method="post">
+                    <form id="frm-delete" action="{{ url_for('posts.delete', pk=post.id) }}" method="post">
                     </form>
                     {% endif %}
                 </div>

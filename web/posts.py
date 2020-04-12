@@ -4,9 +4,10 @@ from forms import PostForm
 
 from models import Post
 
-post_controller = Blueprint('post_controller', __name__)
+blueprint = Blueprint('posts', __name__)
 
-@post_controller.route('/', methods=['GET'])
+
+@blueprint.route('/', methods=['GET'])
 def index():
 
     page = request.args.get('page', 1)
@@ -18,11 +19,11 @@ def index():
 
     return render_template('posts/list.html', posts=posts)
 
-@post_controller.route('/create', methods=['GET', 'POST'])
+@blueprint.route('/create', methods=['GET', 'POST'])
 def create():
 
     if not 'auth' in session:
-        return redirect(url_for('user_controller.login', redirect_url=request.url))
+        return redirect(url_for('users.login', redirect_url=request.url))
 
     form = PostForm()
     if request.method == 'POST' and form.validate_on_submit():
@@ -33,18 +34,18 @@ def create():
         post.body = form.body.data
         post.save()
 
-        return redirect(url_for('post_controller.index'))
+        return redirect(url_for('posts.index'))
 
     return render_template('posts/form.html', form=form)
 
 
-@post_controller.route('/<int:pk>', methods=['GET'])
+@blueprint.route('/<int:pk>', methods=['GET'])
 def show(pk):
     post = Post.with_('user').find_or_fail(pk)
     return render_template('posts/show.html', post=post)
 
 
-@post_controller.route('/<int:pk>/update', methods=['GET', 'POST'])
+@blueprint.route('/<int:pk>/update', methods=['GET', 'POST'])
 def update(pk):
 
     post = Post.find_or_fail(pk)
@@ -56,11 +57,11 @@ def update(pk):
         post.body = form.body.data
         post.save()
 
-        return redirect(url_for('post_controller.show', pk=post.id))
+        return redirect(url_for('posts.show', pk=post.id))
 
     return render_template('posts/form.html', form=form)
 
-@post_controller.route('/<int:pk>/delete', methods=['POST', 'DELETE'])
+@blueprint.route('/<int:pk>/delete', methods=['POST', 'DELETE'])
 def delete(pk):
     Post.destroy(pk)
-    return redirect(url_for('post_controller.index'))
+    return redirect(url_for('posts.index'))

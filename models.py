@@ -22,3 +22,17 @@ class Post(SoftDeletes, Model):
     @belongs_to('user_id', 'id')
     def user(self):
         return User
+
+    @has_many('commentable_id', 'id')
+    def comments(self):
+        return Comment.where('commentable_type', 'posts').order_by('id', 'desc')
+
+
+class Comment(SoftDeletes, Model):
+    __table__ = 'comments'
+    __fillable__ = ['commentable_id', 'commentable_type', 'user_id', 'body']
+    __dates__ = ['deleted_at']
+
+    @belongs_to('user_id', 'id')
+    def user(self):
+        return User
