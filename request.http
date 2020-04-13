@@ -1,4 +1,4 @@
-@base_url = http://127.0.0.1:5000
+@base_url = http://127.0.0.1:7000
 
 
 ###
@@ -29,7 +29,7 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {
-    "page": 2,
+    "page": 1,
     "per_page": 15
 }
 

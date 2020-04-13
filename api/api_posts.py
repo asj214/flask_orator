@@ -30,7 +30,7 @@ def index(page=1, per_page=15):
 
     posts = Post.with_('user', 'comments.user').order_by('created_at', 'desc').paginate(per_page, page)
 
-    pprint(posts.serialize(), indent=2)
+    # pprint(posts.serialize(), indent=2)
 
     return posts
 
