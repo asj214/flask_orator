@@ -1,10 +1,9 @@
 from marshmallow import Schema, fields, pre_load, post_dump
 
-from pprint import pprint
-
 class LoginSchema(Schema):
     email = fields.Email()
     password = fields.Str(load_only=True)
+
 
 class UserSchema(Schema):
     email = fields.Email()
@@ -14,6 +13,7 @@ class UserSchema(Schema):
     class Meta:
         fields = ("email", "name", "last_login_at")
         ordered = True
+
 
 class CommentSchema(Schema):
     id = fields.Int()
@@ -28,6 +28,7 @@ class CommentSchema(Schema):
         fields = ("id", "commentable_id", "commentable_type", "user", "body", "created_at", "updated_at")
         ordered = True
 
+
 class CommentsSchema(CommentSchema):
     @post_dump
     def dump_comment(self, data, **kwargs):
@@ -38,6 +39,7 @@ class CommentsSchema(CommentSchema):
 class PostIndexSchema(Schema):
     page = fields.Int()
     per_page = fields.Int()
+
 
 class PostSchema(Schema):
     id = fields.Int()
@@ -53,6 +55,7 @@ class PostSchema(Schema):
     class Meta:
         fields = ("id", "user", "title", "body", "comments_count", "comments", "created_at", "updated_at")
         ordered = True
+
 
 class PostsSchema(PostSchema):
 

@@ -28,9 +28,7 @@ def index(page=1, per_page=15):
     page = request.json.get('page')
     per_page = request.json.get('per_page')
 
-    posts = Post.with_('user', 'comments.user').order_by('created_at', 'desc').paginate(per_page, page)
-
-    # pprint(posts.serialize(), indent=2)
+    posts = Post.order_by('created_at', 'desc').paginate(per_page, page)
 
     return posts
 
@@ -56,8 +54,7 @@ def create():
 @jwt_optional
 @marshal_with(PostSchema())
 def show(id):
-    post = Post.with_('user', 'comments.user').find_or_fail(id)
-    # pprint(post.serialize(), indent=2)
+    post = Post.find_or_fail(id)
     return post
 
 
@@ -90,7 +87,7 @@ def comments_create(id):
     comment.body = request.json.get('body')
     comment.save()
 
-    post = Post.with_('user', 'comments.user').find(id)
+    post = Post.find(id)
     post.comments_count = post.comments_count + 1
     post.save()
 
@@ -106,7 +103,7 @@ def comments_destroy(id):
     commentable_id = request.json.get('commentable_id')
     Comment.destroy(commentable_id)
 
-    post = Post.with_('user', 'comments.user').find_or_fail(commentable_id)
+    post = Post.find_or_fail(commentable_id)
     post.comments_count = 0 if post.comments_count - 1 < 0 else post.comments_count -1
     post.save()
 
