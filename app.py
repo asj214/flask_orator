@@ -1,7 +1,11 @@
 import json
 from flask import Flask, render_template
+from flasgger import Swagger
 from flask_orator import Orator
 from flask_jwt_extended import JWTManager
+
+from api_docs import template
+
 
 import logging
 
@@ -27,10 +31,15 @@ app.config['ORATOR_DATABASES'] = {
 
 app.config['JWT_SECRET_KEY'] = 'qwe123'  # Change this!
 app.config['JWT_TOKEN_LOCATION'] = ['headers'] # headers', 'cookies', 'query_string', 'json'
+app.config['SWAGGER'] = {
+    'title': 'flask_orator',
+    'uiversion': 3,
+    'openapi': '3.0.2'
+}
 
 db = Orator(app)
 jwt = JWTManager(app)
-
+Swagger(app, template=template)
 
 logger = logging.getLogger('orator.connection.queries')
 logger.setLevel(logging.DEBUG)
