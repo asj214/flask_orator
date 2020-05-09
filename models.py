@@ -18,7 +18,7 @@ class Post(SoftDeletes, Model):
     __table__ = 'posts'
     __fillable__ = ['user_id', 'title', 'body']
     __dates__ = ['deleted_at']
-    __withs__ = ['user']
+    # __withs__ = ['user']
 
     @belongs_to('user_id', 'id')
     def user(self):

@@ -1,4 +1,4 @@
-@base_url = http://127.0.0.1:7000
+@base_url = http://127.0.0.1:5000
 
 
 ###
@@ -24,14 +24,9 @@ Authorization: Bearer {{access_token}}
 
 ###
 # api/posts/index
-GET {{base_url}}/api/posts/
+GET {{base_url}}/api/posts?page=2
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
-
-{
-    "page": 1,
-    "per_page": 15
-}
 
 
 ###
@@ -66,7 +61,7 @@ Authorization: Bearer {{access_token}}
 
 
 ###
-# api/posts/update
+# api/posts/delete
 DELETE {{base_url}}/api/posts/1
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
