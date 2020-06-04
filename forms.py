@@ -23,4 +23,5 @@ class ApiLoginForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField('제목', validators=[DataRequired()])
+    attachments = FileField('첨부파일')
     body = TextAreaField('본문', validators=[DataRequired()])

@@ -10,8 +10,10 @@
                 {{ form.title(class='form-control') }}
             </div>
             <div class="form-group">
-                <label for="attachments">첨부파일</label>
-                <input type="file" name="attachments" class="form-control" id="attachments" />
+                {{ form.attachments.label }}
+                {{ form.attachments(class='form-control') }}
+                <!-- <label for="attachments">첨부파일</label>
+                <input type="file" name="attachments" class="form-control" id="attachments" /> -->
             </div>
             <div class="form-group">
                 {{ form.body.label }}

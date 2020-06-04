@@ -1,6 +1,6 @@
 from app import db
 from orator import Model, SoftDeletes
-from orator.orm import belongs_to, has_many
+from orator.orm import belongs_to, has_one, has_many
 
 
 Model.set_connection_resolver(db)
@@ -18,7 +18,6 @@ class Post(SoftDeletes, Model):
     __table__ = 'posts'
     __fillable__ = ['user_id', 'title', 'body']
     __dates__ = ['deleted_at']
-    # __withs__ = ['user']
 
     @belongs_to('user_id', 'id')
     def user(self):
@@ -28,8 +27,8 @@ class Post(SoftDeletes, Model):
     def comments(self):
         return Comment.where('commentable_type', 'posts').order_by('id', 'desc')
 
-    @has_many('attachment_id', 'id')
-    def comments(self):
+    @has_one('attachment_id', 'id')
+    def attachment(self):
         return Attachment.where('attachment_type', 'posts').order_by('id', 'desc')
 
 

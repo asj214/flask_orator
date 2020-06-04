@@ -54,7 +54,7 @@ def create():
 @jwt_optional
 @marshal_with(PostSchema())
 def show(id):
-    post = Post.with_('user', 'comments.user').find_or_fail(id)
+    post = Post.with_('user', 'attachments', 'comments.user').find_or_fail(id)
     return post
 
 

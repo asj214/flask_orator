@@ -1,4 +1,5 @@
 {
+    "upload_path": "/workspace/flask_orator",
     "secret_key": "secret",
     "database": {
         "host": "localhost",

@@ -59,6 +59,7 @@ from api import (
     api_posts
 )
 
+
 # register blueprint
 app.register_blueprint(users.blueprint, url_prefix='/users')
 app.register_blueprint(posts.blueprint, url_prefix='/posts')
@@ -78,6 +79,7 @@ def routes():
     for endpoint, methods, rule in sorted(rules, key=sort_by_rule):
         route = '{:50s} {:25s} {}'.format(endpoint, methods, rule)
         print(route)
+
 
 @app.route('/')
 def index():
