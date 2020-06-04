@@ -1,13 +1,13 @@
 # flask_orator
 
-대부분의 플라스크 DB 모듈은 sqlalchemy를 이용하지만 
-이번 만큼은 남들이 가지 않는 길을 가보고 싶었다. 
-orator 모듈은 루비온더레일즈와 라라벨의 엘롭퀀트?ORM을 연상시키는 문법을 가지고 있어서 
-document를 읽는데도 부담이 없었다. 
-단지 .... 만든 이가 더 이상 유지/보수를 안하는 것이 매우 안타깝다.
+대부분의 플라스크 DB 모듈은 sqlalchemy를 이용하지만  
+이번 만큼은 남들이 가지 않는 길을 가보고 싶었다.  
+orator 모듈은 루비온더레일즈와 라라벨의 엘롭퀀트?ORM을 연상시키는 문법을 가지고 있어서  
+document를 읽는데도 부담이 없었다.  
+단지 .... 만든 이가 더 이상 유지/보수를 안하는 것이 매우 안타깝다. 
 
-이 repository의 목표는 flutter backend api 구성이다. 
-실제로 [pythonanywhere](https://www.pythonanywhere.com/)에 소스를 올리고, 구글 마켓까지만이라도 빌드하는 것이 목표다. 
+이 repository의 목표는 flutter backend api 구성이다.  
+실제로 [pythonanywhere](https://www.pythonanywhere.com/)에 소스를 올리고, 구글 마켓까지만이라도 빌드하는 것이 목표다.  
 그렇지만 뭘 만들지는 아직 미정.... ㅠㅠ 
 
 
