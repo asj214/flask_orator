@@ -47,7 +47,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "me",
+                "summary": "회원 정보 조회",
                 "tags": ["users"]
             }
         },
@@ -79,7 +79,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@index",
+                "summary": "게시글 목록",
                 "tags": ["posts"]
             },
             "post": {
@@ -111,7 +111,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@create",
+                "summary": "게시글 작성",
                 "tags": ["posts"]
             }
         },
@@ -135,7 +135,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@show",
+                "summary": "게시글 보기",
                 "tags": ["posts"]
             },
             "put": {
@@ -179,7 +179,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@update",
+                "summary": "게시글 수정",
                 "tags": ["posts"]
             },
             "delete": {
@@ -201,7 +201,7 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@show",
+                "summary": "게시글 삭제",
                 "tags": ["posts"]
             },
         },
@@ -242,9 +242,11 @@ template = {
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@comment.create",
+                "summary": "게시글 댓글 작성",
                 "tags": ["posts"]
-            },
+            }
+        },
+        "/api/posts/{id}/comments/{comment_id}": {
             "delete": {
                 "security": [
                     {"bearerAuth": []}
@@ -259,15 +261,26 @@ template = {
                             "default": 1,
                             "example": 1
                         }
+                    },
+                    {
+                        "name": "comment_id",
+                        "in": "path",
+                        "required": True,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": 1
+                        }
                     }
                 ],
                 "responses": {
                     "200": {"description": "OK"}
                 },
-                "summary": "posts@comment.delete",
+                "summary": "게시글 댓글 삭제",
                 "tags": ["posts"]
             }
         }
+
     },
     "components": {
         "securitySchemes": {
