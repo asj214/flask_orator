@@ -28,7 +28,7 @@ def index(page=1, per_page=15):
     page = request.json.get('page')
     per_page = request.json.get('per_page')
 
-    posts = Post.order_by('created_at', 'desc').paginate(per_page, page)
+    posts = Post.with_('user', 'comments.user').order_by('created_at', 'desc').paginate(per_page, page)
 
     return posts
 
@@ -54,7 +54,7 @@ def create():
 @jwt_optional
 @marshal_with(PostSchema())
 def show(id):
-    post = Post.find_or_fail(id)
+    post = Post.with_('user', 'comments.user').find_or_fail(id)
     return post
 
 
