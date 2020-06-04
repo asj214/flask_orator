@@ -1,4 +1,5 @@
 {
+    "secret_key": "secret",
     "database": {
         "host": "localhost",
         "port": 3306,
@@ -6,5 +7,6 @@
         "password": "password1",
         "database": "flask_orator",
         "log_queries": true
-    }
+    },
+    "jwt_secret_key": "qwe1234"
 }

@@ -61,11 +61,7 @@ Authorization: Bearer {{access_token}}
 
 
 ###
-<<<<<<< HEAD
 # api/posts/remove
-=======
-# api/posts/delete
->>>>>>> eb291f33d68626a722c96a3034aeea18e237e32e
 DELETE {{base_url}}/api/posts/1
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
