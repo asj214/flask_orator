@@ -54,6 +54,7 @@ class PostSchema(Schema):
 
     class Meta:
         fields = ("id", "user", "title", "body", "comments_count", "comments", "created_at", "updated_at")
+        # fields = ("id", "user", "title", "body", "comments_count", "created_at", "updated_at")
         ordered = True
 
 

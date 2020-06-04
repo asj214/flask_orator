@@ -19,14 +19,14 @@ from pprint import pprint
 blueprint = Blueprint('api_posts', __name__)
 
 
-@use_kwargs(PostIndexSchema())
+# @use_kwargs(PostIndexSchema())
 @blueprint.route('/', methods=['GET'])
-@jwt_optional
+@jwt_required
 @marshal_with(PostsSchema(many=True))
-def index(page=1, per_page=15):
+def index():
 
-    page = request.json.get('page')
-    per_page = request.json.get('per_page')
+    page = request.args.get('page', type=int, default=1)
+    per_page = request.args.get('per_page', type=int, default=15)
 
     posts = Post.with_('user', 'comments.user').order_by('created_at', 'desc').paginate(per_page, page)
 
