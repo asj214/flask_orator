@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, session, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
 from forms import PostForm
-from models import Post, Attachment
+from models import Post, Comment, Attachment
 
 blueprint = Blueprint('posts', __name__)
 
@@ -80,7 +80,22 @@ def update(pk):
     return render_template('posts/form.html', form=form)
 
 
-@blueprint.route('/<int:pk>/delete', methods=['POST', 'DELETE'])
-def delete(pk):
-    Post.where('user_id', session['auth']['id']).destroy(pk)
+@blueprint.route('/<int:id>/delete', methods=['POST', 'DELETE'])
+def delete(id):
+    Post.where('user_id', session['auth']['id']).destroy(id)
     return redirect(url_for('posts.index'))
+
+
+@blueprint.route('/<int:id>/comment', methods=['DELETE'])
+def comment_create(id):
+
+    post = Post.find_or_fail(id)
+
+    comment = Comment()
+    comment.commentable_id = id
+    comment.commentable_type = 'posts'
+    comment.user_id = session['auth']['id']
+    comment.save()
+
+    post.comments_count = post.comments_count + 1
+    post.save()

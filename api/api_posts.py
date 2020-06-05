@@ -19,7 +19,6 @@ from pprint import pprint
 blueprint = Blueprint('api_posts', __name__)
 
 
-# @use_kwargs(PostIndexSchema())
 @blueprint.route('/', methods=['GET'])
 @jwt_required
 @marshal_with(PostsSchema(many=True))
@@ -75,6 +74,16 @@ def update(id):
     return post
 
 
+@blueprint.route('/<int:id>', methods=['DELETE'])
+@jwt_required
+def destroy(id):
+
+    user_id = get_jwt_identity()
+    post = Post.where('user_id', user_id).find_or_fail(id)
+    post.delete()
+    return jsonify({'status': 200, 'data': None})
+
+
 @blueprint.route('/<int:id>/comments', methods=['POST'])
 @jwt_required
 @marshal_with(PostSchema())
@@ -91,30 +100,18 @@ def comments_create(id):
     post.comments_count = post.comments_count + 1
     post.save()
 
-    # pprint(post.serialize(), indent=2)
     return post
 
 
-@blueprint.route('/<int:id>/comments', methods=['DELETE'])
+@blueprint.route('/<int:id>/comments/<int:comment_id>', methods=['DELETE'])
 @jwt_required
 @marshal_with(PostSchema())
-def comments_destroy(id):
+def comments_destroy(id, comment_id):
 
-    commentable_id = request.json.get('commentable_id')
-    Comment.destroy(commentable_id)
+    Comment.destroy(comment_id)
 
-    post = Post.find_or_fail(commentable_id)
+    post = Post.find_or_fail(id)
     post.comments_count = 0 if post.comments_count - 1 < 0 else post.comments_count -1
     post.save()
 
     return post
-
-
-@blueprint.route('/<int:id>', methods=['DELETE'])
-@jwt_required
-def destroy(id):
-
-    user_id = get_jwt_identity()
-    post = Post.where('user_id', user_id).find_or_fail(id)
-    post.delete()
-    return jsonify({'status': 200, 'data': None})
